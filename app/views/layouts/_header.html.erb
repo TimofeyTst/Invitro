@@ -8,12 +8,13 @@
       <li class="nav-item">
         <%= link_to "Посещения", visits_path, class: "nav-link" %>
       </li>
-      <li class="nav-item">
+      <li class="nav-item mx-4">
         <%= link_to "Новый талон", new_visit_path, class: "nav-link" %>
       </li>
-      <li class="nav-item">
-        <%= link_to "Прием пациента", "#", class: "nav-link" %>
-      </li>
+      <form class="d-flex ms-auto mx-4" action="<%= search_path %>" method="get">
+        <input class="form-control me-2" type="visit_id" placeholder="Введите номер талона" aria-label="Search" name="visit_id">
+        <button class="btn btn-outline-primary" type="submit">Найти</button>
+      </form>
     </ul>
   </div>
 </nav>

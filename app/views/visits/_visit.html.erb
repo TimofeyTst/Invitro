@@ -4,6 +4,7 @@
       <h5 class="card-title"><%= visit.patient.full_name %></h5>
       <h6 class="card-subtitle mb-2 text-muted">Посещение</h6>
       <ul class="list-group list-group-flush">
+        <li class="list-group-item">Номер талона: <%= visit.id %></li>
         <li class="list-group-item">Медицинская карточка: <%= visit.patient.medical_record_number %></li>
         <li class="list-group-item">Врач: <%= visit.doctor.full_name %></li>
         <li class="list-group-item">Специальность врача: <%= visit.doctor.speciality.specialty_name %></li>

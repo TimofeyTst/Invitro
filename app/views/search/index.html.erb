@@ -1,0 +1,27 @@
+<%= render 'layouts/page_names', text: "Результаты поиска" %>
+
+<% if @visit %>
+<%= render @visit %>
+<div class="btn-group my-4" role="group">
+  <%= link_to "Изменить посещение", edit_visit_path(@visit), class: "btn btn-primary rounded-pill mx-2" %>
+
+  <%= button_to "Удалить посещение", @visit, method: :delete, data: { confirm: "Вы уверены?" }, class: "btn btn-danger rounded-pill mx-2" %>
+</div>
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Диагноз</h5>
+    <p class="card-text"> - <%= @visit.diagnosis[0]&.diagnosis_text %></p>
+
+    <h6 class="card-subtitle mb-2 text-muted">Жалобы</h6>
+    <% @visit.complaints&.each_with_index do |complain, idx| %>
+        <p class="card-text"><%= idx + 1 %>. <%= complain.complaint_text %></p>
+    <% end %>
+
+    <h6 class="card-subtitle mb-2 text-muted">Предписания</h6>
+    <% @visit.diagnosis[0]&.prescription&.each_with_index do |prescription, idx| %>
+        <p class="card-text"><%= idx + 1 %>. <%= prescription.text %></p>
+    <% end %>
+</div>
+<% else %>
+<p class="mx-2">Талон с номером <%= params[:visit_id] %> не найден</p>
+<% end %>
