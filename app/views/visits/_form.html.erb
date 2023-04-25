@@ -1,9 +1,9 @@
-<%= form_with(model: visit) do |form| %>
+<%= form_with(model: visit, local: true) do |form| %>
   <% if visit.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(visit.errors.count, "error") %> prohibited this visit from being saved:</h2>
+    <div class="alert alert-danger" role="alert">
+      <h4 class="alert-heading"><%= pluralize(visit.errors.count, "ошибка") %> не позволяет сохранить посещение:</h4>
 
-      <ul>
+      <ul class="mb-0">
         <% visit.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -11,26 +11,42 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :doctor_id %>
-    <%= form.collection_select :doctor_id, Doctor.all, :id, :full_name %>
+  <div class="card mb-3">
+    <div class="card-body">
+      <div class="form-group">
+        <%= form.label :patient_id, "Пациент" %>
+        <%= form.collection_select :patient_id, Patient.all, :id, :full_name, { prompt: "Выберите пациента" }, { class: "form-control" } %>
+      </div>
 
-    <%= form.label :patient_id %>
-    <%= form.collection_select :patient_id, Patient.all, :id, :full_name %>
-  </div>
+      <div class="form-group">
+        <%= form.label :doctor_id, "Врач" %>
+        <%= form.collection_select :doctor_id, Doctor.all, :id, :full_name, { prompt: "Выберите доктора" }, { class: "form-control" } %>
+      </div>
 
-  <div>
-    <%= form.label :visit_date %>
-    <%= form.date_select :visit_date %>
-    
-    <%= form.label :visit_time %>
-    <%= form.time_select :visit_time %>
-    
-    <%= form.label :room_id %>
-    <%= form.collection_select :room_id, Room.all, :id, :room_number %>
-  </div>
+      <div class="form-group">
+        <%= form.label :room_id, "Кабинет" %>
+        <%= form.collection_select :room_id, Room.all, :id, :room_number, { prompt: "Выберите кабинет" }, { class: "form-control" } %>
+      </div>
 
-  <div>
-    <%= form.submit %>
+      <div class="form-group">
+        <%= form.label :visit_date, "Дата посещения" %>
+        <%= form.date_select :visit_date, { class: "form-control" } %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :visit_time, "Время посещения" %>
+        <%= form.time_select :visit_time, { class: "form-control" } %>
+      </div>
+
+      <div class="form-group form-check">
+        <%= form.label :attended, class: "form-check-label" do %>
+          <%= form.check_box :attended, class: "form-check-input" %>
+          <%= visit.attended ? "Посещено" : "Не посещено" %>
+        <% end %>
+      </div>
+      <div class="form-group">
+        <%= form.submit "Сохранить", class: "btn btn-primary rounded-pill mx-2" %>
+      </div>
+    </div>
   </div>
 <% end %>

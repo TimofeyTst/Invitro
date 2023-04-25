@@ -4,7 +4,7 @@ class VisitsController < ApplicationController
   # GET /visits or /visits.json
   def index
     # @visits = Visit.all
-    @visits = Visit.limit(10)
+    @visits = Visit.limit(100)
   end
 
   # GET /visits/1 or /visits/1.json

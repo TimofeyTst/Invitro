@@ -1,10 +1,11 @@
-<p style="color: green"><%= notice %></p>
+<% if notice %>
+  <p class="alert alert-success"><%= notice %></p>
+<% end %>
 
 <%= render @visit %>
 
-<div>
-  <%= link_to "Edit this visit", edit_visit_path(@visit) %> |
-  <%= link_to "Back to visits", visits_path %>
+<div class="btn-group" role="group">
+  <%= link_to "Изменить посещение", edit_visit_path(@visit), class: "btn btn-primary rounded-pill mx-2" %>
 
-  <%= button_to "Destroy this visit", @visit, method: :delete %>
+  <%= button_to "Удалить посещение", @visit, method: :delete, data: { confirm: "Вы уверены?" }, class: "btn btn-danger rounded-pill mx-2" %>
 </div>

@@ -1,14 +1,35 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Visits</h1>
+<%= render 'layouts/page_names', text: "Посещения" %>
 
 <div id="visits">
-  <% @visits.each do |visit| %>
-    <%= render visit %>
-    <p>
-      <%= link_to "Show this visit", visit %>
-    </p>
-  <% end %>
+  <table style="width:100%; border-collapse:collapse;">
+    <thead>
+      <tr>
+        <th style="padding:2px;">ФИО пациента</th>
+        <th style="padding:2px;">Медицинская карточка</th>
+        <th style="padding:2px;">ФИО врача</th>
+        <th style="padding:2px;">Специальность</th>
+        <th style="padding:2px;">Номер кабинета</th>
+        <th style="padding:2px;">Время посещения</th>
+        <th style="padding:2px;">Посещено</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @visits.each do |visit| %>
+    <tr id="<%= dom_id visit %>">
+      <td style="padding:2px;"><%= visit.patient.short_name %></td>
+      <td style="padding:2px;"><%= visit.patient.medical_record_number %></td>
+      <td style="padding:2px;"><%= visit.doctor.short_name %></td>
+      <td style="padding:2px;"><%= visit.doctor.speciality.specialty_name %></td>
+      <td style="padding:2px;"><%= visit.room.room_number %></td>
+      <td style="padding:2px;"><%= link_to visit.visit_time.strftime('%H:%M'), visit %></td>
+      <td class="<%= visit.attended ? 'text-success font-weight-bold' : 'text-danger font-weight-bold' %>" style="padding:10px;">
+        <%= visit.attended ? "Посещено" : "Не посещено" %>
+      </td>
+    </tr>
+    <% end %>
+    </tbody>
+  </table>
 </div>
-
-<%= link_to "New visit", new_visit_path %>

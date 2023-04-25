@@ -1,9 +1,17 @@
 <div id="<%= dom_id visit %>">
-  <p>Patient name: <%= visit.patient.full_name %></p>
-  <p>Doctor: <%= visit.doctor.full_name %></p>
-  <p>Visit date: <%= visit.visit_date %></p>
-  <p>Visit time: <%= visit.visit_time %></p>
-  <p>Room number: <%= visit.room.room_number %></p>
-  <p>Attended: <%= visit.attended %></p>
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title"><%= visit.patient.full_name %></h5>
+      <h6 class="card-subtitle mb-2 text-muted">Посещение</h6>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Медицинская карточка: <%= visit.patient.medical_record_number %></li>
+        <li class="list-group-item">Врач: <%= visit.doctor.full_name %></li>
+        <li class="list-group-item">Специальность врача: <%= visit.doctor.speciality.specialty_name %></li>
+        <li class="list-group-item">Номер кабинета: <%= visit.room.room_number %></li>
+        <li class="list-group-item">Дата посещения: <%= visit.visit_date %></li>
+        <li class="list-group-item">Время посещения: <%= visit.visit_time.strftime('%H:%M') %></li>
+        <li class="list-group-item <%= visit.attended ? 'list-group-item-success' : 'list-group-item-danger' %> font-weight-bold"><%= visit.attended ? "Посещено" : "Не посещено" %></li>
+      </ul>
+    </div>
+  </div>
 </div>
-
