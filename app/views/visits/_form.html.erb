@@ -12,6 +12,25 @@
   <% end %>
 
   <div>
+    <%= form.label :doctor_id %>
+    <%= form.collection_select :doctor_id, Doctor.all, :id, :full_name %>
+
+    <%= form.label :patient_id %>
+    <%= form.collection_select :patient_id, Patient.all, :id, :full_name %>
+  </div>
+
+  <div>
+    <%= form.label :visit_date %>
+    <%= form.date_select :visit_date %>
+    
+    <%= form.label :visit_time %>
+    <%= form.time_select :visit_time %>
+    
+    <%= form.label :room_id %>
+    <%= form.collection_select :room_id, Room.all, :id, :room_number %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>
